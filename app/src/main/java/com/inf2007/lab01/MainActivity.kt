@@ -49,13 +49,15 @@ fun MainScreen() {
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 UserInput(
-                    name = name,
-                    onNameChange = { name = it }
+                    name = username,    // pass in 'username' instead of 'name'
+                    onNameChange = { username = it }    // pass in 'username' instead of 'name'
                 )
 
                 Button(
                     onClick = {
                         if (username.isNotBlank()) {
+                            showGreeting = true // instead of 'false', show greeting when not blank
+                        } else {
                             showGreeting = false
                         }
                     },
@@ -67,7 +69,7 @@ fun MainScreen() {
                 }
 
                 if (showGreeting) {
-                    Greeeting(
+                    Greeting(   // mistyped spelling (Greeeting)
                         name = username,
                         modifier = Modifier
                             .fillMaxWidth()
@@ -88,17 +90,17 @@ fun UserInput(name: String, onNameChange: (String) -> Unit, modifier: Modifier =
         label = { Text("Enter your Name") },
         modifier = modifier
             .fillMaxWidth()
-            .testTag("UserInput")
+            .testTag("nameInput")   // correct test tag is 'nameInput' instead of 'UserInput'
     )
 }
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
-        text = "Hello $username!, Welcome to InF2007!",
+        text = "Hello $name!, Welcome to InF2007!", // Use 'name' instead of 'username'
         modifier = Modifier
             .fillMaxWidth()
-            .testTag("greeting")
+            .testTag("greetingMsg") // correct test tag is 'greetingMsg' instead of 'greeting'
     )
 }
 
